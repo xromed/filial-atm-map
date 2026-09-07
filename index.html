@@ -793,7 +793,7 @@ const D = {"banks":["Agrobank","Aloqabank","Asakabank","Asia Alliance Bank","BRB
 const TYPE_COLOR = ["#1f1f8f","#8f3f1f","#de862e","#9c6b3a","#f1c40f","#2c7ab4","#8e6ca6","#27ae60","#60ae27"];
 const BANK_COLOR = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#42d4f4","#f032e6","#bfef45","#fabebe","#469990","#dcbeff","#9A6324","#800000","#aaffc3","#808000","#ffd8b1","#000075","#a9a9a9","#ff7f00","#1b9e77"];
 const map = L.map('map',{preferCanvas:true}).setView([41.3,64.6],6);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
 const cluster = L.markerClusterGroup({chunkedLoading:true,maxClusterRadius:45,disableClusteringAtZoom:15});
 map.addLayer(cluster);
 
