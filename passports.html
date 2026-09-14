@@ -52,8 +52,13 @@ const DATA = [
 ];
 DATA.forEach(d => { if (!d.chunks) d.img = 'passports/photos/' + d.passport + '.svg'; });
 const map = L.map('map', {zoomControl:true});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {subdomains:'abcd', maxZoom:20,
-  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+// Подложка: стандартные тайлы OSM. При открытии файла с диска (file://, без Referer) tile.openstreetmap.org
+// отдаёт заглушку «Access blocked», поэтому локально используем Esri World Street Map (ключ не нужен).
+const useOSM = location.protocol !== 'file:';
+L.tileLayer(useOSM ? 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                   : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+  {maxZoom:19, attribution: useOSM ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                   : 'Tiles &copy; Esri &mdash; данные OpenStreetMap и др.'}).addTo(map);
 const icon = L.divIcon({className:'', html:'<div class="pin"></div>', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-8], tooltipAnchor:[8,0]});
 const isTouch = matchMedia('(hover: none)').matches;
 const markers = [];
